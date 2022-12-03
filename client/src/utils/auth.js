@@ -20,6 +20,8 @@ class AuthService {
     try {
       const decoded = decode(token);
       if (decoded.exp < Date.now() / 1000) {
+
+  // ** Liz note in example there is this localStorage.removeItem('id_token'); here
         return true;
       } else return false;
     } catch (err) {
