@@ -20,7 +20,7 @@ const server = new ApolloServer({
 });
 //** end Liz added ***
 
-app.use(express.urlencoded({ extended: false })); //in example this is false on activity 22-25 in server.js, Liz matched this
+app.use(express.urlencoded({ extended: false })); //in example this is false on activity 21-25 in server.js, Liz matched this
 app.use(express.json());
 
 // if we're in production, serve client/build as static assets
