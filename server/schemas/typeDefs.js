@@ -23,7 +23,7 @@ type Author {
 
 type Book {
     id: ID!
-    bookID: String!
+    bookId: String!
     title: String!
     authors: [Author]
     description: String!
@@ -91,9 +91,10 @@ type SaveBookPayload {
 # Do we need to pass any book data in below?
 type Query {
     users: [User]
-    user(username: String!): User
+    user (username: String!): User
     me: User
-    books: [Book!]!
+    book (bookId: String!): Book
+    books: [Book!]
   }
 
 

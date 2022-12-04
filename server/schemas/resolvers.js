@@ -1,27 +1,29 @@
 // Using lesson 21-26 as base code for this
 
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Book } = require('../models');
+const { User, bookSchema } = require('../models');
 const { signToken } = require('../utils/auth');
+
+
 
 const resolvers = {
     Query: {
         users: async () => {
-            return User.find().populate('books');
+            return User.find().populate('savedBooks');
         },
         user: async (parent, { username }) => {
-            return User.findOne({ username }).populate('books');
+            return User.findOne({ username }).populate('savedBooks');
         },
         books: async (parent, { username }) => {
             const params = username ? { username } : {};
-            return Book.find(params).sort({ createdAt: -1 });
+            return bookSchema.find(params).sort({ createdAt: -1 });
         },
         book: async (parent, { bookId }) => {
-            return Book.findOne({ _id: bookId });
+            return bookSchema.findOne({ _id: bookId });
         },
         me: async (parent, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('books');
+                return User.findOne({ _id: context.user._id }).populate('savedBooks');
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -72,7 +74,7 @@ const resolvers = {
         saveBook: async (parent, { savedBooks }, context) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: user._id },
+                    { _id: user._id }, //userId?
                     { $addToSet: { savedBooks: body } },
                     { new: true, runValidators: true }
                 );
