@@ -9,7 +9,7 @@ The following .gif shows the application's appearance and functionality.
 
 Searched Book Page
 
-<img src=".\assets\21-mern-homework-demo-01.GIF" width="400"> 
+<img src=".\Assets\21-mern-homework-demo-01.gif" width="400"> 
 
 ## Link to Deployed Application on Heroku:
 https://lizgooglebooksearch.herokuapp.com/
